@@ -8,6 +8,8 @@ import { TareasComponent } from './components/tareas/tareas.component';
 import { TareasFormComponent } from './components/tareas-form/tareas-form.component';
 import { TareasListComponent } from './components/tareas-list/tareas-list.component';
 
+import { TareasService } from './services/tareas.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,7 @@ import { TareasListComponent } from './components/tareas-list/tareas-list.compon
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [TareasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

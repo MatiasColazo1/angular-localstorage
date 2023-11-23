@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { TareasService } from 'src/app/services/tareas.service';
 
 @Component({
   selector: 'app-tareas-form',
@@ -7,7 +8,7 @@ import { Component, OnInit} from '@angular/core';
 })
 export class TareasFormComponent implements OnInit {
  
-   constructor() { }
+   constructor(public tareasService: TareasService) { }
 
    ngOnInit() {
     
@@ -15,6 +16,14 @@ export class TareasFormComponent implements OnInit {
 
    addTarea(newTitulo:HTMLInputElement, newDescripcion:HTMLTextAreaElement) {
     console.log("agregando", newTitulo.value, newDescripcion.value);
+    this.tareasService.addTareas({
+      titulo: newTitulo.value,
+      descripcion: newDescripcion.value,
+      oculto: true
+    });
+    newTitulo.value = '';
+    newDescripcion.value = '';
+    newTitulo.focus();
     return false;
    }
 }

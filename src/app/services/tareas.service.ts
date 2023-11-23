@@ -10,8 +10,8 @@ export class TareasService {
 
   constructor() { 
     this.tareas = [
-      {titulo: 'leer', descripcion: 'Tengo que leer'},
-      {titulo: 'website', descripcion: 'Crear un sitio web'},
+      {titulo: 'leer', descripcion: 'Tengo que leer', oculto: true},
+      {titulo: 'website', descripcion: 'Crear un sitio web', oculto: true},
     ]
    }
 
@@ -20,6 +20,14 @@ export class TareasService {
    }
 
    addTareas(tareas: Tareas) {
-    this.tareas.push(tareas)
+    this.tareas.push(tareas);
+   }
+
+   deleteTareas(tareas: Tareas) {
+    for(let i = 0; i < this.tareas.length; i++) {
+      if(tareas == this.tareas[i]){
+        this.tareas.splice(i, 1);
+      }
+    }
    }
 }
