@@ -1,1 +1,15 @@
-<p>tareas-form works!</p>
+<div class="card">
+    <div class="card-body">
+        <form (submit)="addTarea(newTitulo, newDescripcion)">
+            <div class="mb-3">
+                <input type="text" #newTitulo class="form-control" name="" id="" placeholder="Titulo de la tarea">
+            </div>
+            <div class="mb-3">
+                <textarea name="" #newDescripcion class="form-control" cols="30" rows="10" placeholder="Descripción de la tarea"></textarea>
+            </div>
+            <button class="btn btn-primary">
+                Enviar
+            </button>
+        </form>
+    </div>
+</div>
