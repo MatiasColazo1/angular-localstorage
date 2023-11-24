@@ -19,6 +19,8 @@ export class TareasComponent implements OnInit{
     }
 
     deleteTareas(tarea: Tareas) {
-      this.tareasService.deleteTareas(tarea)
+      if(confirm('Estas seguro de querer eliminar la tarea?')) {
+        this.tareasService.deleteTareas(tarea);
+      }
     }
 }

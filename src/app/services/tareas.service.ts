@@ -6,28 +6,42 @@ import { Tareas } from '../models/tareas';
 })
 export class TareasService {
 
-  tareas: Tareas[];
+  // Usar una clave única para evitar conflictos con otras aplicaciones
+  private storageKey = 'misTareas';
+
+  tareas: Tareas[] = [];
 
   constructor() { 
-    this.tareas = [
-      {titulo: 'leer', descripcion: 'Tengo que leer', oculto: true},
-      {titulo: 'website', descripcion: 'Crear un sitio web', oculto: true},
-    ]
-   }
-
-   getTareas() {
-    return this.tareas;
-   }
-
-   addTareas(tareas: Tareas) {
-    this.tareas.push(tareas);
-   }
-
-   deleteTareas(tareas: Tareas) {
-    for(let i = 0; i < this.tareas.length; i++) {
-      if(tareas == this.tareas[i]){
-        this.tareas.splice(i, 1);
-      }
+    // Recuperar tareas almacenadas en el localStorage al inicializar el servicio
+    const storedTareas = localStorage.getItem(this.storageKey);
+    if (storedTareas) {
+      this.tareas = JSON.parse(storedTareas);
     }
-   }
+  }
+
+  getTareas() {
+    return this.tareas;
+  }
+
+  addTareas(tarea: Tareas) {
+    this.tareas.push(tarea);
+
+    // Guardar las tareas actualizadas en el localStorage
+    this.saveTareasToLocalStorage();
+  }
+
+  deleteTareas(tarea: Tareas) {
+    const index = this.tareas.indexOf(tarea);
+    if (index !== -1) {
+      this.tareas.splice(index, 1);
+
+      // Guardar las tareas actualizadas en el localStorage
+      this.saveTareasToLocalStorage();
+    }
+  }
+
+  // Método privado para guardar las tareas en el localStorage
+  private saveTareasToLocalStorage() {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.tareas));
+  }
 }
